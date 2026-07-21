@@ -1,6 +1,6 @@
-# One manifest, two hats. In Prova a plugin *is* a test suite that also exports a namespace, so this
-# single file both declares the plugin (`[plugin]`) and runs its proofs (`[run]`). Author the plugin
-# in init.lua; prove it in tests/; ship both together.
+# One manifest, two hats. In Prova a package is one prova.toml-rooted unit; this one both exports a
+# namespace (a plugin — `[plugin]`) and runs its own proofs (a suite — `[run]`). Author the plugin in
+# init.lua; prove it in tests/; ship both together.
 [plugin]
 name        = "parallels"
 description = "Provision a Parallels VM as a topology — black-box test a full-OS target Docker can't contain"

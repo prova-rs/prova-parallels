@@ -4,10 +4,10 @@ A plugin for [Prova](https://github.com/prova-rs/prova) — provision a Parallel
 to black-box test a full-OS target Docker can't contain: a systemd unit, a kernel module, a whole
 install, a Windows box.
 
-In Prova a plugin *is* a test suite that also exports a namespace: one `prova.toml` declares the
-plugin and runs its own proofs. This repo is that — the factory lives in `init.lua`, its proofs in
-`tests/`. It drives `prlctl` through `shell.run` (zero native code) and is gated on `prlctl`, so it
-skips cleanly off a Parallels host.
+In Prova a **package** is one `prova.toml`-rooted unit; it can act as a **plugin** (exports a
+namespace) and a **suite** (runs its own proofs). This repo is such a package — the factory lives in
+`init.lua`, its proofs in `tests/`. It drives `prlctl` through `shell.run` (zero native code) and is
+gated on `prlctl`, so it skips cleanly off a Parallels host.
 
 ## Use it
 
