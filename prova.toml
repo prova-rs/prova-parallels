@@ -1,0 +1,28 @@
+# One manifest, two hats. In Prova a plugin *is* a test suite that also exports a namespace, so this
+# single file both declares the plugin (`[plugin]`) and runs its proofs (`[run]`). Author the plugin
+# in init.lua; prove it in tests/; ship both together.
+[plugin]
+name        = "parallels"
+description = "Provision a Parallels VM as a topology — black-box test a full-OS target Docker can't contain"
+license     = "MIT"
+
+# The public topology contract. A project references `vm` in its [topologies]; the `factory` is this
+# plugin's own detail. `requires = ["prlctl"]` is the environment gate — on a machine without Parallels
+# Desktop, `prlctl` isn't on PATH, so `prova up` and any test using it skip cleanly instead of failing.
+[[plugin.topologies]]
+name     = "vm"
+factory  = "vm"
+requires = ["prlctl"]
+
+# The range of prova versions this plugin is built against; a consumer is checked against it.
+[requires]
+prova = ">=0.3"
+
+[run]
+paths = ["tests"]
+
+# Resolve THIS plugin from its own directory, so the self-tests can `require("parallels")` exactly as
+# a consumer would. A CONSUMER instead pins it by source — a released tag:
+#   parallels = { git = "https://github.com/prova-rs/prova-parallels", tag = "v1" }
+[plugins]
+parallels = { path = "." }
