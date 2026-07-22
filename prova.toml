@@ -1,6 +1,6 @@
 # One manifest, two hats. In Prova a package is one prova.toml-rooted unit; this one both exports a
-# namespace (a plugin — `[plugin]`) and runs its own proofs (a suite — `[run]`). Author the plugin in
-# init.lua; prove it in tests/; ship both together.
+# namespace (a plugin — `[plugin]`) and runs its own proofs (a suite). Author the plugin in
+# init.lua; prove it in proofs/; ship both together.
 [plugin]
 name        = "parallels"
 description = "Provision a Parallels VM as a topology — black-box test a full-OS target Docker can't contain"
@@ -17,9 +17,6 @@ requires = ["prlctl"]
 # The range of prova versions this plugin is built against; a consumer is checked against it.
 [requires]
 prova = ">=0.3"
-
-[run]
-paths = ["tests"]
 
 # Resolve THIS plugin from its own directory, so the self-tests can `require("parallels")` exactly as
 # a consumer would. A CONSUMER instead pins it by source — a released tag:
